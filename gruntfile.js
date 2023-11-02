@@ -91,7 +91,15 @@ module.exports = function(grunt) {
                     'dist/scripts/main.min.js': 'src/scripts/main.js'
                 }
             }
-        }
+        },
+        copy: {
+            images: {
+                expand: true,
+                cwd: 'src/',
+                src: ['images/*'],
+                dest: 'dist/',
+            },
+        },
         
     })
 
@@ -101,7 +109,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin')
     grunt.loadNpmTasks('grunt-contrib-clean')
     grunt.loadNpmTasks('grunt-contrib-uglify')
+    grunt.loadNpmTasks('grunt-contrib-copy')
 
     grunt.registerTask('default',['watch'])
-    grunt.registerTask('build',['less:production', 'htmlmin:dist', 'replace:dist', 'clean', 'uglify'])
+    grunt.registerTask('build',['less:production', 'htmlmin:dist', 'replace:dist', 'clean', 'uglify', 'copy:images'])
 }
